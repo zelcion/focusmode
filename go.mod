@@ -1,3 +1,3 @@
-module focusmode.com/bin
+module github.com/zelcion/focusmode/bin
 
 go 1.24
