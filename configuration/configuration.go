@@ -8,7 +8,7 @@ import (
 	"github.com/zelcion/focusmode/constants"
 )
 
-func getDefaultConfigPath() string {
+func GetDefaultConfigPath() string {
 	homeDir, err := os.UserHomeDir()
 
 	if err != nil {
@@ -20,7 +20,7 @@ func getDefaultConfigPath() string {
 }
 
 func getDefaultConfigDir() string {
-	configPath := getDefaultConfigPath()
+	configPath := GetDefaultConfigPath()
 	return filepath.Dir(configPath)
 }
 
@@ -42,7 +42,7 @@ func InitializeConfig() (*Configuration, error) {
 		return nil, err
 	}
 
-	configPath := getDefaultConfigPath()
+	configPath := GetDefaultConfigPath()
 	var config *Configuration
 
 	if _, err := os.Stat(configPath); os.IsNotExist(err) {

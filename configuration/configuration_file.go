@@ -8,11 +8,16 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+type DomainEntry struct {
+	Domain string `yaml:"domain"`
+	Active bool   `yaml:"active"`
+}
+
 type Configuration struct {
-	Version            string   `yaml:"version"`
-	BlockedDomains     []string `yaml:"blocked_domains"`
-	BlockedExecutables []string `yaml:"blocked_executables"`
-	Active             bool     `yaml:"active"`
+	Version            string        `yaml:"version"`
+	BlockedDomains     []DomainEntry `yaml:"blocked_domains"`
+	BlockedExecutables []string      `yaml:"blocked_executables"`
+	Active             bool          `yaml:"active"`
 }
 
 func LoadConfiguration(path string) (*Configuration, error) {
@@ -44,8 +49,22 @@ func (c *Configuration) Save(path string) error {
 func NewEmptyConfiguration() *Configuration {
 	return &Configuration{
 		Version:            constants.CURRENT_VERSION,
-		BlockedDomains:     []string{},
+		BlockedDomains:     []DomainEntry{},
 		BlockedExecutables: []string{},
 		Active:             false,
+	}
+}
+
+func (c *Configuration) setDomainBlock(domain string, active bool) {
+	exists := false
+	for i, entry := range c.BlockedDomains {
+		if entry.Domain == domain {
+			c.BlockedDomains[i].Active = active
+			exists = true
+			break
+		}
+	}
+	if !exists {
+		c.BlockedDomains = append(c.BlockedDomains, DomainEntry{Domain: domain, Active: active})
 	}
 }

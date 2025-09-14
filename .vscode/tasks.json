@@ -1,0 +1,47 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Focusmode",
+            "type": "shell",
+            "command": "go",
+            "args": ["build", "-o", "build/focusmode", "."],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": ["$go"]
+        },
+        {
+            "label": "Run Focusmode",
+            "type": "shell",
+            "command": "go",
+            "args": ["run", "."],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": ["$go"]
+        },
+        {
+            "label": "Test Focusmode",
+            "type": "shell",
+            "command": "go",
+            "args": ["test", "./..."],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": ["$go"]
+        }
+    ]
+}
